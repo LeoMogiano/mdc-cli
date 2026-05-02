@@ -1,5 +1,9 @@
 # Mobile Dev Cleaner
 
+<p align="center">
+  <img src="docs/screenshot.png" alt="Mobile Dev Cleaner TUI" width="900" />
+</p>
+
 Terminal app for macOS that scans and cleans junk left behind by Xcode and Android Studio. DerivedData, simulators, AVDs, Gradle caches, SDK toolchains, orphan IDE versions — all in one place, with safety rails.
 
 Typically frees **20–40 GB** on an active mobile dev's Mac.
