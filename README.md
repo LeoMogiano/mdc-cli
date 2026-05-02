@@ -4,6 +4,14 @@
   <img src="docs/screenshot.png" alt="Mobile Dev Cleaner TUI" width="900" />
 </p>
 
+<p align="center">
+  <a href="https://www.npmjs.com/package/mobile-dev-cleaner"><img src="https://img.shields.io/npm/v/mobile-dev-cleaner?color=cb3837&label=npm" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/mobile-dev-cleaner"><img src="https://img.shields.io/npm/dw/mobile-dev-cleaner?color=cb3837" alt="npm downloads" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT license" /></a>
+  <img src="https://img.shields.io/badge/macOS-only-black?logo=apple" alt="macOS only" />
+  <img src="https://img.shields.io/badge/node-%E2%89%A520-brightgreen?logo=node.js" alt="Node 20+" />
+</p>
+
 Terminal app for macOS that scans and cleans junk left behind by Xcode and Android Studio. DerivedData, simulators, AVDs, Gradle caches, SDK toolchains, orphan IDE versions — all in one place, with safety rails.
 
 Typically frees **20–40 GB** on an active mobile dev's Mac.
@@ -25,6 +33,12 @@ Requires macOS and Node 20+.
 
 ```bash
 npm install -g mobile-dev-cleaner
+```
+
+Update later:
+
+```bash
+npm update -g mobile-dev-cleaner
 ```
 
 ## Usage
