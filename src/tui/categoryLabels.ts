@@ -58,7 +58,6 @@ export const androidCategoriesOrder: readonly Category[] = [
   Category.AndroidAvds,
   Category.AndroidSdkSystemImages,
   Category.AndroidSdkVersioned,
-  Category.AndroidSdkBinaries,
-  Category.AndroidSdkAux,
+
   Category.AndroidStudioOrphan,
 ];
