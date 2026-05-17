@@ -26,14 +26,20 @@ import { ContainerCandidate } from "../models/container.js";
 import { dict, nextLang } from "./i18n.js";
 
 // Reserved rows for header + status line + footer + borders.
-const RESERVED_ROWS = 14;
+// Breakdown: title-box(3) + categoryview-overhead-focused(6) + statusline(6) = 15
+const RESERVED_ROWS = 15;
 const MIN_VIEWPORT = 4;
 const MAX_VIEWPORT = 24;
 
 export function App() {
   const { exit } = useApp();
   const { stdout } = useStdout();
-  const rows = stdout.rows ?? 30;
+  const [rows, setRows] = useState(stdout.rows ?? 30);
+  useEffect(() => {
+    const onResize = () => setRows(stdout.rows ?? 30);
+    stdout.on("resize", onResize);
+    return () => { stdout.off("resize", onResize); };
+  }, [stdout]);
   const viewport = Math.max(MIN_VIEWPORT, Math.min(MAX_VIEWPORT, rows - RESERVED_ROWS));
   const status = useAppStore((s) => s.status);
   const error = useAppStore((s) => s.error);

@@ -7,7 +7,7 @@ import { runHeadless } from "./headless.js";
 async function main() {
   const args = process.argv.slice(2);
   if (args.length === 0) {
-    const { waitUntilExit } = render(React.createElement(App));
+    const { waitUntilExit } = render(React.createElement(App), { alternateScreen: true });
     await waitUntilExit();
     return;
   }

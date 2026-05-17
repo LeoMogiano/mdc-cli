@@ -130,6 +130,24 @@ export function CategoryView({
   );
 }
 
+function countVisualRows(
+  slice: CleanupCandidate[],
+  prevGroup: string | undefined,
+): number {
+  let rows = 0;
+  let last = prevGroup;
+  for (let i = 0; i < slice.length; i++) {
+    const c = slice[i]!;
+    if (c.group && c.group !== last) {
+      rows += 1;
+      if (i > 0) rows += 1;
+    }
+    rows += 1;
+    last = c.group;
+  }
+  return rows;
+}
+
 function CandidatesList({
   candidates,
   cursor,
@@ -144,17 +162,30 @@ function CandidatesList({
   d: Dict;
 }) {
   const max = candidates.reduce((m, c) => Math.max(m, c.size), 0);
+  const SCROLL_OFF = 3;
+  const anchorBelow = Math.min(cursor + SCROLL_OFF, candidates.length - 1);
   const start = Math.max(
-    0,
+    Math.max(0, anchorBelow - viewport + 1),
     Math.min(
-      cursor - Math.floor(viewport / 2),
+      Math.max(0, cursor - SCROLL_OFF),
       Math.max(0, candidates.length - viewport),
     ),
   );
-  const visible = candidates.slice(start, start + viewport);
 
-  let lastGroup: string | undefined = undefined;
-  if (start > 0) lastGroup = candidates[start - 1]?.group;
+  const hasPageIndicator = candidates.length > viewport;
+  const targetRows = hasPageIndicator ? viewport - 1 : viewport;
+
+  const prevGroup: string | undefined = start > 0 ? candidates[start - 1]?.group : undefined;
+  const visible: CleanupCandidate[] = [];
+  for (let idx = start; idx < candidates.length; idx++) {
+    const trial = [...visible, candidates[idx]!];
+    if (countVisualRows(trial, prevGroup) > targetRows) break;
+    visible.push(candidates[idx]!);
+  }
+  const usedRows = countVisualRows(visible, prevGroup);
+  const padRows = Math.max(0, targetRows - usedRows);
+
+  let lastGroup: string | undefined = prevGroup;
 
   return (
     <Box flexDirection="column">
@@ -178,11 +209,10 @@ function CandidatesList({
           </Box>
         );
       })}
-      {candidates.length > viewport ? (
-        <Text color={theme.dim}>
-          {cursor + 1}/{candidates.length}
-        </Text>
-      ) : null}
+      {Array.from({ length: padRows }, (_, i) => (
+        <Box key={`pad-${i}`} height={1} />
+      ))}
+      {/* pagination indicator hidden temporarily */}
     </Box>
   );
 }
@@ -200,14 +230,19 @@ function ContainersList({
   viewport: number;
   d: Dict;
 }) {
+  const hasPageIndicator = containers.length > viewport;
+  const effectiveViewport = hasPageIndicator ? viewport - 1 : viewport;
+  const SCROLL_OFF = 3;
+  const anchorBelow = Math.min(cursor + SCROLL_OFF, containers.length - 1);
   const start = Math.max(
-    0,
+    Math.max(0, anchorBelow - effectiveViewport + 1),
     Math.min(
-      cursor - Math.floor(viewport / 2),
-      Math.max(0, containers.length - viewport),
+      Math.max(0, cursor - SCROLL_OFF),
+      Math.max(0, containers.length - effectiveViewport),
     ),
   );
-  const visible = containers.slice(start, start + viewport);
+  const visible = containers.slice(start, start + effectiveViewport);
+  const padRows = Math.max(0, effectiveViewport - visible.length);
   const maxSize = containers.reduce((m, c) => Math.max(m, c.totalSize), 0);
   return (
     <Box flexDirection="column">
@@ -220,11 +255,10 @@ function ContainersList({
           maxSize={maxSize}
         />
       ))}
-      {containers.length > viewport ? (
-        <Text color={theme.dim}>
-          {cursor + 1}/{containers.length}
-        </Text>
-      ) : null}
+      {Array.from({ length: padRows }, (_, i) => (
+        <Box key={`pad-${i}`} height={1} />
+      ))}
+      {/* pagination indicator hidden temporarily */}
     </Box>
   );
 }
