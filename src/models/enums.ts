@@ -13,6 +13,7 @@ export enum Category {
   DerivedData = "derived_data",
   XcodeCaches = "xcode_caches",
   XcodeArchives = "xcode_archives",
+  XCTestDevices = "xctest_devices",
   IosDeviceSupport = "ios_device_support",
   IosSimulators = "ios_simulators",
   IosRuntimes = "ios_runtimes",
