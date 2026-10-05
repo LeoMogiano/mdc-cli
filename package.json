@@ -1,6 +1,6 @@
 {
   "name": "mobile-dev-cleaner",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "TUI to scan and clean Xcode and Android Studio junk on macOS — DerivedData, simulators, AVDs, Gradle caches, SDKs, and more.",
   "type": "module",
   "bin": {
