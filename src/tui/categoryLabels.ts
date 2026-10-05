@@ -6,6 +6,7 @@ export function categoryLabel(cat: Category, d: Dict): string {
     case Category.DerivedData: return d.catDerivedData;
     case Category.XcodeCaches: return d.catXcodeCaches;
     case Category.XcodeArchives: return d.catXcodeArchives;
+    case Category.XCTestDevices: return d.catXCTestDevices;
     case Category.IosDeviceSupport: return d.catIosDeviceSupport;
     case Category.IosSimulators: return d.catIosSimulators;
     case Category.IosRuntimes: return d.catIosRuntimes;
@@ -37,6 +38,7 @@ export function toolLabel(tool: Tool, d: Dict): string {
 export const xcodeCategoriesOrder: readonly Category[] = [
   Category.DerivedData,
   Category.XcodeCaches,
+  Category.XCTestDevices,
   Category.IosSimulators,
   Category.IosRuntimes,
   Category.IosDeviceSupport,

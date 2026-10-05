@@ -49,6 +49,11 @@ const PATHS = {
       reason: "Playground devices",
     },
     {
+      path: path.join(HOME, "Library/Developer/XCTestDevices"),
+      category: Category.XCTestDevices,
+      reason: "Residuos de corridas de test (XCUITest), se regenera solo",
+    },
+    {
       path: path.join(HOME, "Library/Developer/Xcode/Packages"),
       category: Category.XcodeCaches,
       reason: "Swift Packages metadata",
