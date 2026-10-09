@@ -59,7 +59,7 @@ export async function runHeadless(argv: string[]): Promise<number> {
       if (opts.json) {
         process.stdout.write(scanResultToJson(result) + "\n");
       } else {
-        for (const tool of [Tool.Xcode, Tool.Android] as const) {
+        for (const tool of [Tool.Xcode, Tool.Android, Tool.Flutter] as const) {
           const r = result.reports[tool];
           if (!r) continue;
           for (const c of r.candidates) {

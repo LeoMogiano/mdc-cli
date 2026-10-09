@@ -6,6 +6,7 @@ export enum RiskLevel {
 export enum Tool {
   Xcode = "xcode",
   Android = "android",
+  Flutter = "flutter",
 }
 
 export enum Category {
@@ -36,6 +37,11 @@ export enum Category {
   AndroidSdkBinaries = "android_sdk_binaries",
   AndroidSdkAux = "android_sdk_aux",
   AndroidStudioOrphan = "android_studio_orphan",
+  // Flutter
+  FlutterProjects = "flutter_projects",
+  PubCache = "pub_cache",
+  FlutterSdkCache = "flutter_sdk_cache",
+  FvmVersions = "fvm_versions",
 }
 
 export enum ExecutionKind {
