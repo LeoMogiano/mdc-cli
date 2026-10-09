@@ -28,11 +28,19 @@ export function categoryLabel(cat: Category, d: Dict): string {
     case Category.AndroidSdkBinaries: return d.catAndroidSdkBinaries;
     case Category.AndroidSdkAux: return d.catAndroidSdkAux;
     case Category.AndroidStudioOrphan: return d.catAndroidStudioOrphan;
+    case Category.FlutterProjects: return d.catFlutterProjects;
+    case Category.PubCache: return d.catPubCache;
+    case Category.FlutterSdkCache: return d.catFlutterSdkCache;
+    case Category.FvmVersions: return d.catFvmVersions;
   }
 }
 
 export function toolLabel(tool: Tool, d: Dict): string {
-  return tool === Tool.Xcode ? d.toolXcode : d.toolAndroid;
+  switch (tool) {
+    case Tool.Xcode: return d.toolXcode;
+    case Tool.Android: return d.toolAndroid;
+    case Tool.Flutter: return d.toolFlutter;
+  }
 }
 
 export const xcodeCategoriesOrder: readonly Category[] = [
@@ -63,3 +71,4 @@ export const androidCategoriesOrder: readonly Category[] = [
 
   Category.AndroidStudioOrphan,
 ];
+
